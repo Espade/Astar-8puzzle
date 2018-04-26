@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>8-Puzzle</title>
+
+    <style type="text/css">
+
+        body {
+            margin: 0 auto;
+            padding: 50px;
+
+        }
+
+        #about {
+            padding-right: 30px;
+            padding-left: 30px;
+            padding-top: 20px;
+            padding-bottom: 40px;
+
+            margin-left: 30px;
+            width: 300px;
+            /*height: 400px;*/
+            margin-top: 40px;
+            border: 3px dashed lightgray;
+            float: left;
+            font-size: 1.4em;
+        }
+
+        #gameFrame {
+            width: 600px;
+            height: 600px;
+            position: relative;
+            margin: auto;
+            margin-left: 470px;
+        }
+
+        #game_board {
+            width: 600px;
+            height: 600px;
+            background: lightgray;
+            position: relative;
+            border: solid black 1px;
+            -webkit-box-shadow: 5px 5px 5px #111;
+            box-shadow: 5px 5px 5px #111;
+        }
+
+        input {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            outline: none;
+            width: 130px;
+            margin: 0px 7px;
+            padding: 7px 0px;
+            padding-bottom: 0px;
+
+            border-radius: 3px; /*css3属性IE不支持*/
+            /*padding-left:5px;*/
+            text-align: center;
+            font-size: 0.8em;
+
+        }
+
+        input:focus {
+            color: #ccc;
+            border-color: black;
+        }
+
+        #treeFrame {
+            margin-top: 70px;
+            visibility: hidden;
+        }
+
+
+        #instruction {
+            border: solid 1px #ccc;
+            border-radius: 3px;
+
+            width: 1089px;
+
+            margin-bottom: 0px;
+            border-bottom-style: none;
+            padding: 10px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            background-color: #eee;
+        }
+
+        #svgg {
+            padding: 40px 0px;
+            border: solid 1px #ccc;
+            border-radius: 3px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+        }
+
+    </style>
+
+    <style type="text/css">
+
+        .node circle {
+
+            fill: lightgrey;
+            /*stroke: green;*/
+            /*stroke-width: 2px;*/
+        }
+
+        .node.not circle {
+            fill: black;
+            /*stroke: green;*/
+            /*stroke-width: 2px;*/
+        }
+
+        .node.desired circle {
+
+            fill: red;
+            /*stroke: green;*/
+            /*stroke-width: 2px;*/
+        }
+
+        .node text {
+            fill: black;
+        }
+
+        .node.choose text {
+            fill: red;
+        }
+
+        .link {
+            fill: none;
+            stroke: lightgrey;
+        }
+
+        .d3-tip {
+            line-height: 1;
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Creates a small triangle extender for the tooltip */
+        .d3-tip:after {
+            box-sizing: border-box;
+            display: inline;
+            font-size: 10px;
+            width: 100%;
+            line-height: 1;
+            color: rgba(0, 0, 0, 0.8);
+            content: "\25BC";
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Style northward tooltips specifically */
+        .d3-tip.n:after {
+            margin: -2px 0 0 0;
+            top: 100%;
+            left: 0;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="main_container">
+
+
+    <div>
+        <div id="about">
+            <h2>解8数码问题</h2>
+            <p> 当前状态：<input type="text" id="iinitStr"
+                            onkeyup="value=value.replace(/[^0-8]/g,'');value=value.replace(/([0-8])(.*?)\1/g,function (substring, arg1,arg2) {return arg1+arg2;})"
+                            maxlength="9"></p>
+
+            <p> 目标状态：<input type="text" id="idestStr"
+                            onkeyup="value=value.replace(/[^0-8]/g,'');value=value.replace(/([0-8])(.*?)\1/g,function (substring, arg1,arg2) {return arg1+arg2;})"
+                            maxlength="9"></p>
+
+
+            <p> 使用A*算法，<a id="solve" href="#">自动求解</a></p>
+
+            <p id="resultt"></p>
+
+
+        </div>
+
+        <div id="gameFrame">
+            <div id="game_board"></div>
+        </div>
+
+    </div>
+
+
+    <div id="treeFrame">
+        <div id="instruction">
+            点击面板任意位置，演示下一步，或者<a id="finishh" href="#">点击这里</a>一步完成演示。（光标悬停在结点上试试）<a href="more.png" target="_blank">算法原理？</a>
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+
+
+<!-- 导入次序不能变动，且只能放在末尾 -->
+<script src="js/utils/jquery-1.8.3.js"></script>
+<script src="js/utils/d3.v2.js"></script>
+<script src="js/utils/d3-tip.js"></script>
+
+
+<script src="js/solver.js"></script>
+<script src="js/game.js"></script>
+<script src="js/tree.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+</html>
