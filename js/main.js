@@ -149,12 +149,12 @@ $('#solve').on('click', function (e) {
 
     e.preventDefault();
 
-    $('#iinitStr').attr('value', Input.initStr).blur(function () {
+    $('#iinitStr').css("border-color", "#ccc").css("color", "black").attr('value', Input.initStr).blur(function () {
         $(this).css("border-color", "#ccc").css("color", "black");
     });
 
 
-    $("#idestStr").attr('value', Input.destStr).blur(function () {
+    $("#idestStr").css("border-color", "#ccc").css("color", "black").attr('value', Input.destStr).blur(function () {
         $(this).css("border-color", "#ccc").css("color", "black");
     });
 
