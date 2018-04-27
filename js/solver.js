@@ -2,25 +2,20 @@
 
 
 var Move = {
-
     up: function (state) {
         if (state.blankIndex > 2)
             return new State(state, state.blankIndex - 3);
     },
-
     down: function (state) {
         if (state.blankIndex < 6) {
             return new State(state, state.blankIndex + 3);
         }
     },
-
     left: function (state) {
         if (state.blankIndex % 3 > 0) {
             return new State(state, state.blankIndex - 1);
         }
     },
-
-
     right: function (state) {
         if (state.blankIndex % 3 < 2) {
             return new State(state, state.blankIndex + 1);
@@ -31,21 +26,18 @@ var Move = {
 
 function State(preState, blankIndex) {
     if (preState) {
+        // array 表示当前数码状态
         this.array = Array.from(preState.array);
-        //将移动后的位置的值，传给之前的位置的值
-
-
         this.array[preState.blankIndex] = this.array[blankIndex];
-
         this.array[blankIndex] = Puzzle.blank;
 
-        //设置当前状态的空白位置信息
+        // 空数码的位置
         this.blankIndex = blankIndex;
 
-        //标记位，标记一共移动了多少次
+        // 已经花费的代价
         this.g = preState.g + 1;
 
-        //离总目标还有多远
+        // 估计 离目标的剩余代价
         this.h = this.getHeuristic();
 
         this.f = this.g + this.h;
@@ -53,6 +45,8 @@ function State(preState, blankIndex) {
         this.preState = preState;
     }
 }
+
+
 
 State.prototype.isSolved = function () {
     for (var i = 0; i < this.array.length; i++) {
@@ -105,15 +99,15 @@ State.prototype.getHeuristic = function () {
     //     }
     // }
     // return hamming;
-
 };
 
 
 
 
+
+
+
 var Puzzle = {
-
-
     createInitialState: function (init, dest) {
         var o = new State();
 
@@ -139,17 +133,13 @@ var Puzzle = {
     },
 
     set: function () {
-
         Puzzle.init = Input.initStr.split('').map(function (data) {
             return parseInt(data);
         });
-
         Puzzle.dest = Input.destStr.split('').map(function (data) {
             return parseInt(data);
         });
-
         Puzzle.initialState = Puzzle.createInitialState(Puzzle.init, Puzzle.dest);
-
     },
 
     isSolvable: function () {
@@ -170,7 +160,6 @@ var Puzzle = {
     },
 
     solveByAStar: function () {
-
         if (!Puzzle.isSolvable()) {
             return undefined;
         }
@@ -187,14 +176,8 @@ var Puzzle = {
 
 
         var showExpansion=[];
-
-
         var oneExpand={};
-
-
         var lastExpandedIndex=-1;
-
-
         var newInserted=[];
 
 
@@ -283,7 +266,6 @@ var Puzzle = {
                 moveList.reverse();
 
                 return {data:dataList,process:showExpansion,moves:moveList,prompt:prompts};
-
             }
 
             tryInsertOpenList(Move.up(nowState));
