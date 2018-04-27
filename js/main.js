@@ -7,7 +7,7 @@ var delayTimes = 200;
 var Input = {
 
 
-    initStr: '243716058', //21
+    initStr: '013485276', //21
     destStr: '123456780'
 
     // initStr: '254873160', //98
@@ -116,9 +116,15 @@ $('#finishh').on('click', function (e) {
 
     e.preventDefault();
 
-    if(Result.data.length>50){
-        treeSVG.duration=20;
+    if(Result.data.length>30){
+        treeSVG.duration=parseInt(9000/Result.data.length);
+    }else{
+        treeSVG.duration=300;
     }
+
+
+
+
 
 
     var interval = setInterval(function finish() {
