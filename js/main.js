@@ -177,7 +177,7 @@ $('#solve').on('click', function (e) {
 
     if (Result !== undefined) {
 
-        $('#resultt').css("color", "green").html(Result.prompt+"<br><br><a href=\"#instruction\" onclick=\"showTree();\">查看演示过程</a>");
+        $('#resultt').css("color", "green").html(Result.prompt+"<br><br><a href=\"#instruction\" onclick=\"showTree();\">查看搜索过程</a>");
 
         var intervall = setInterval(function finish() {
             Game.move_position(Result.moves.shift());
